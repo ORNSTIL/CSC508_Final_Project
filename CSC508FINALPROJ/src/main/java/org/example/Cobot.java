@@ -13,17 +13,19 @@ public class Cobot implements PropertyChangeListener {
     private Socket socket;
     private PrintWriter out;
 
+    // Start position (joint angles)
+    private static final String START_POSITION = "movej([1.14, -2.16, -1.58, -1.57, 1.57, 0], a=1.0, v=0.5)";
+
     public Cobot() {
-        // Register this class as a listener to the Blackboard
         Blackboard.getInstance().addPropertyChangeListener(this);
         logger.info("Cobot registered as a listener to Blackboard.");
     }
 
     public boolean connect() {
         try {
-            socket = new Socket("localhost", 30002);
+            socket = new Socket(ServerConfig.URSIM_SERVER.getHost(), ServerConfig.URSIM_SERVER.getPort());
             out = new PrintWriter(socket.getOutputStream(), true);
-            logger.info("Connected to Cobot.");
+            logger.info("Connected to Cobot at {}:{}", ServerConfig.URSIM_SERVER.getHost(), ServerConfig.URSIM_SERVER.getPort());
             return true;
         } catch (IOException e) {
             logger.error("Failed to connect to Cobot: {}", e.getMessage());
@@ -60,16 +62,77 @@ public class Cobot implements PropertyChangeListener {
     }
 
     private void drawLetter(String letter) {
-        switch (letter) {
-            case "A":
-                sendCommand("movel(p[0.0, 0.0, 0.1, 0, 0, 0], a=1.0, v=0.5)"); // Example
-                break;
-            case "B":
-                sendCommand("movel(p[0.0, 0.1, 0.1, 0, 0, 0], a=1.0, v=0.5)"); // Example
-                break;
-            // Add cases for other letters
-            default:
-                logger.warn("Unhandled letter: {}", letter);
+        try {
+            // Move to start position
+            logger.info("Moving to start position...");
+            sendCommand(START_POSITION);
+            Thread.sleep(2000); // Wait for the robot to reach the position
+
+            // Perform the drawing movements
+            switch (letter) {
+                case "A":
+                    drawA();
+                    break;
+                case "B":
+                    drawB();
+                    break;
+                // Add more cases for other letters
+                default:
+                    logger.warn("Unhandled letter: {}", letter);
+            }
+
+            // Return to start position
+            logger.info("Returning to start position...");
+            sendCommand(START_POSITION);
+            Thread.sleep(2000); // Wait for the robot to return
+        } catch (InterruptedException e) {
+            logger.error("Interrupted while waiting: {}", e.getMessage());
+        }
+    }
+
+    private void drawA() {
+        try {
+            // Move downwards to start drawing
+            sendCommand("movel(p[0.51845, -0.42828, -0.21507, 0.005, -3.134, -0.007], a=1.0, v=0.2)");
+            Thread.sleep(1000);
+
+            // Draw the first leg of "A"
+            sendCommand("movel(p[0.51845, -0.42828, -0.31507, 0.005, -3.134, -0.007], a=1.0, v=0.2)");
+            Thread.sleep(1000);
+
+            // Draw the second leg of "A"
+            sendCommand("movel(p[0.56845, -0.42828, -0.31507, 0.005, -3.134, -0.007], a=1.0, v=0.2)");
+            Thread.sleep(1000);
+
+            // Draw the crossbar
+            sendCommand("movel(p[0.54345, -0.42828, -0.26507, 0.005, -3.134, -0.007], a=1.0, v=0.2)");
+            Thread.sleep(1000);
+
+        } catch (InterruptedException e) {
+            logger.error("Error while drawing A: {}", e.getMessage());
+        }
+    }
+
+    private void drawB() {
+        try {
+            // Move downwards to start drawing
+            sendCommand("movel(p[0.51845, -0.42828, -0.21507, 0.005, -3.134, -0.007], a=1.0, v=0.2)");
+            Thread.sleep(1000);
+
+            // Draw the vertical line
+            sendCommand("movel(p[0.51845, -0.42828, -0.31507, 0.005, -3.134, -0.007], a=1.0, v=0.2)");
+            Thread.sleep(1000);
+
+            // Draw the first curve of "B"
+            sendCommand("movel(p[0.56845, -0.42828, -0.26507, 0.005, -3.134, -0.007], a=1.0, v=0.2)");
+            Thread.sleep(1000);
+
+            // Draw the second curve of "B"
+            sendCommand("movel(p[0.56845, -0.42828, -0.31507, 0.005, -3.134, -0.007], a=1.0, v=0.2)");
+            Thread.sleep(1000);
+
+        } catch (InterruptedException e) {
+            logger.error("Error while drawing B: {}", e.getMessage());
         }
     }
 }
