@@ -11,12 +11,10 @@ public class Blackboard {
     private String data;
     private final PropertyChangeSupport support;
 
-    // Private constructor for Singleton
     private Blackboard() {
         support = new PropertyChangeSupport(this);
     }
 
-    // Get the singleton instance
     public static synchronized Blackboard getInstance() {
         if (instance == null) {
             instance = new Blackboard();
@@ -25,19 +23,16 @@ public class Blackboard {
         return instance;
     }
 
-    // Add a listener
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         support.addPropertyChangeListener(listener);
         logger.debug("Listener added: {}", listener.getClass().getName());
     }
 
-    // Remove a listener
     public void removePropertyChangeListener(PropertyChangeListener listener) {
         support.removePropertyChangeListener(listener);
         logger.debug("Listener removed: {}", listener.getClass().getName());
     }
 
-    // Set data and notify listeners
     public void setData(String data) {
         String oldData = this.data;
         this.data = data;
@@ -45,7 +40,6 @@ public class Blackboard {
         logger.info("Data updated in Blackboard: {}", data);
     }
 
-    // Get the current data
     public String getData() {
         return data;
     }
