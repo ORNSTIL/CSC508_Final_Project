@@ -8,6 +8,15 @@ import java.net.Socket;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Class responsible for managing the cobot's connection and executing commands to draw letters based on input.
+ *
+ * @version 1.0
+ * @author Luca Ornstil
+ * @author Monish Suresh
+ * @author Christine Widden
+ */
+
 public class Cobot implements PropertyChangeListener {
     private static final Logger logger = LoggerFactory.getLogger(Cobot.class);
     private Socket socket;
@@ -26,6 +35,8 @@ public class Cobot implements PropertyChangeListener {
             socket = new Socket(ServerConfig.URSIM_SERVER.getHost(), ServerConfig.URSIM_SERVER.getPort());
             out = new PrintWriter(socket.getOutputStream(), true);
             logger.info("Connected to Cobot at {}:{}", ServerConfig.URSIM_SERVER.getHost(), ServerConfig.URSIM_SERVER.getPort());
+            sendCommand(START_POSITION); // Move to the start position on connection
+            logger.info("Moved to START_POSITION on connect.");
             return true;
         } catch (IOException e) {
             logger.error("Failed to connect to Cobot: {}", e.getMessage());
@@ -41,6 +52,10 @@ public class Cobot implements PropertyChangeListener {
         } catch (IOException e) {
             logger.error("Failed to disconnect from Cobot: {}", e.getMessage());
         }
+    }
+
+    public boolean isConnected() {
+        return socket != null && socket.isConnected();
     }
 
     private void sendCommand(String command) {
@@ -62,6 +77,11 @@ public class Cobot implements PropertyChangeListener {
     }
 
     private void drawLetter(String letter) {
+        if (letter == null || letter.trim().isEmpty()) {
+            logger.warn("Attempted to draw a null or empty letter.");
+            return;
+        }
+
         try {
             // Move to start position
             logger.info("Moving to start position...");
@@ -96,15 +116,12 @@ public class Cobot implements PropertyChangeListener {
             sendCommand("movel(p[0.51845, -0.42828, -0.21507, 0.005, -3.134, -0.007], a=1.0, v=0.2)");
             Thread.sleep(1000);
 
-            // Draw the first leg of "A"
             sendCommand("movel(p[0.51845, -0.42828, -0.31507, 0.005, -3.134, -0.007], a=1.0, v=0.2)");
             Thread.sleep(1000);
 
-            // Draw the second leg of "A"
             sendCommand("movel(p[0.56845, -0.42828, -0.31507, 0.005, -3.134, -0.007], a=1.0, v=0.2)");
             Thread.sleep(1000);
 
-            // Draw the crossbar
             sendCommand("movel(p[0.54345, -0.42828, -0.26507, 0.005, -3.134, -0.007], a=1.0, v=0.2)");
             Thread.sleep(1000);
 
@@ -119,15 +136,12 @@ public class Cobot implements PropertyChangeListener {
             sendCommand("movel(p[0.51845, -0.42828, -0.21507, 0.005, -3.134, -0.007], a=1.0, v=0.2)");
             Thread.sleep(1000);
 
-            // Draw the vertical line
             sendCommand("movel(p[0.51845, -0.42828, -0.31507, 0.005, -3.134, -0.007], a=1.0, v=0.2)");
             Thread.sleep(1000);
 
-            // Draw the first curve of "B"
             sendCommand("movel(p[0.56845, -0.42828, -0.26507, 0.005, -3.134, -0.007], a=1.0, v=0.2)");
             Thread.sleep(1000);
 
-            // Draw the second curve of "B"
             sendCommand("movel(p[0.56845, -0.42828, -0.31507, 0.005, -3.134, -0.007], a=1.0, v=0.2)");
             Thread.sleep(1000);
 
