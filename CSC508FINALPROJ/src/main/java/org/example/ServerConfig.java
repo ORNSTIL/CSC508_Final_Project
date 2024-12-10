@@ -1,5 +1,14 @@
 package org.example;
 
+/**
+ * Enum for managing server configurations.
+ *
+ * @version 1.0
+ * @author Luca Ornstil
+ * @author Monish Suresh
+ * @author Christine Widden
+ */
+
 public enum ServerConfig {
     URSIM_SERVER("localhost", 30002);
 

@@ -7,6 +7,15 @@ import java.util.ArrayList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Singleton class representing a central storage for letter input, managing observers and notifying them of property changes.
+ *
+ * @version 1.0
+ * @author Luca Ornstil
+ * @author Monish Suresh
+ * @author Christine Widden
+ */
+
 public class Blackboard {
     private static final Logger logger = LoggerFactory.getLogger(Blackboard.class);
     private static Blackboard instance;
@@ -38,7 +47,16 @@ public class Blackboard {
     }
 
     public void setKeyboardLetter(String keyboardLetter) {
+        if (keyboardLetter == null) {
+            logger.warn("Attempted to set null keyboardLetter in Blackboard.");
+            return;
+        }
+        
         String oldData = this.keyboardLetter;
+
+        this.keyboardLetter = null; // Set to null temporarily
+        support.firePropertyChange("keyboardLetter", oldData, null);
+
         this.keyboardLetter = keyboardLetter;
         support.firePropertyChange("keyboardLetter", oldData, keyboardLetter);
         logger.info("Keyboard letter updated in Blackboard: {}", keyboardLetter);

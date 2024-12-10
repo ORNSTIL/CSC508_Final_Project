@@ -9,6 +9,15 @@ import java.net.Socket;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Class responsible for managing the cobot's connection and executing commands to draw letters based on input.
+ *
+ * @version 1.0
+ * @author Luca Ornstil
+ * @author Monish Suresh
+ * @author Christine Widden
+ */
+
 public class Cobot implements PropertyChangeListener {
     private static final Logger logger = LoggerFactory.getLogger(Cobot.class);
     private Socket socket;
@@ -35,6 +44,8 @@ public class Cobot implements PropertyChangeListener {
             socket = new Socket(ServerConfig.URSIM_SERVER.getHost(), ServerConfig.URSIM_SERVER.getPort());
             out = new PrintWriter(socket.getOutputStream(), true);
             logger.info("Connected to Cobot at {}:{}", ServerConfig.URSIM_SERVER.getHost(), ServerConfig.URSIM_SERVER.getPort());
+            sendCommand(START_POSITION); // Move to the start position on connection
+            logger.info("Moved to START_POSITION on connect.");
             return true;
         } catch (IOException e) {
             logger.error("Failed to connect to Cobot: {}", e.getMessage());
@@ -50,6 +61,10 @@ public class Cobot implements PropertyChangeListener {
         } catch (IOException e) {
             logger.error("Failed to disconnect from Cobot: {}", e.getMessage());
         }
+    }
+
+    public boolean isConnected() {
+        return socket != null && socket.isConnected();
     }
 
     private void sendCommand(String command) {
