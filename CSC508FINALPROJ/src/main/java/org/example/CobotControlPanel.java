@@ -70,7 +70,7 @@ public class CobotControlPanel extends JPanel {
             return;
         }
 
-        Blackboard.getInstance().setData(key);
+        Blackboard.getInstance().setKeyboardLetter(key);
         gui.commandIndicator.setText("Command: " + key);
         logger.info("Key '{}' clicked and sent to Blackboard.", key);
     }

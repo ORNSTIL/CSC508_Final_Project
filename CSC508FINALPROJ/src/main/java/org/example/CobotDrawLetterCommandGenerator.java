@@ -2,7 +2,6 @@ package org.example;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -11,7 +10,6 @@ import org.slf4j.LoggerFactory;
 
 public class CobotDrawLetterCommandGenerator implements PropertyChangeListener {
     private static final Logger logger = LoggerFactory.getLogger(CobotDrawLetterCommandGenerator.class);
-    private PrintWriter out;
     private final LetterDataProcessor ldp;
     private int charactersDrawn = 0;
     private final int rowCharacterWidth; // how many characters to draw before moving to the next row
@@ -87,7 +85,7 @@ public class CobotDrawLetterCommandGenerator implements PropertyChangeListener {
         if ("keyboardLetter".equals(evt.getPropertyName())) {
             String letter = (String) evt.getNewValue();
             logger.info("Received data from Blackboard: {}", letter);
-            if (Objects.equals(letter, "")) return;
+            if (letter == null || Objects.equals(letter, "")) return;
             genLetter(letter);
         }
     }
@@ -105,8 +103,8 @@ public class CobotDrawLetterCommandGenerator implements PropertyChangeListener {
                 double baseHorizontalPose = writingStartPosHorizontal + (characterWidthM + characterPaddingM) * columnNumber;
                 double baseLengthPose = writingStartPosLength + rowHeightM * rowNumber;
 
-                double curHorizontalPose = baseHorizontalPose;
-                double curLengthPose = baseLengthPose;
+                double curHorizontalPose;
+                double curLengthPose;
 
                 // hover the pen...
                 curHorizontalPose = clampAdjustNumber(line.get(0).get(0), 5.0, characterWidthM);
