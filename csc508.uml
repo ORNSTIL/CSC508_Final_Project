@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>org.example</OriginalElement>
+  <nodes>
+    <node x="988.4619658695301" y="549.4158960551905">org.example.ServerConfig</node>
+    <node x="334.1451511043015" y="386.16555732157144">org.example.Blackboard</node>
+    <node x="774.3694035491577" y="332.64527375146577">org.example.CobotControlPanel</node>
+    <node x="241.80754888054008" y="800.9337181131939">org.example.Cobot</node>
+    <node x="-149.79016312363638" y="550.1458461750626">org.example.LetterDataProcessor</node>
+    <node x="289.3751218233878" y="-14.296191739706927">org.example.CobotDrawLetterCommandGenerator</node>
+    <node x="883.4526455526741" y="855.959513662257">org.example.CobotGUI</node>
+    <node x="774.7882170362067" y="648.1193642115151">org.example.Main</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="org.example.CobotDrawLetterCommandGenerator" target="org.example.LetterDataProcessor" relationship="CREATE">
+      <point x="-181.5" y="15.0" />
+      <point x="61.709836876363624" y="72.70380826029307" />
+      <point x="15.0" y="-50.0" />
+    </edge>
+    <edge source="org.example.Cobot" target="org.example.CobotDrawLetterCommandGenerator" relationship="CREATE">
+      <point x="-112.93242705715227" y="-84.0" />
+      <point x="271.8751218233878" y="87.70380826029307" />
+      <point x="-181.5" y="30.0" />
+    </edge>
+    <edge source="org.example.CobotDrawLetterCommandGenerator" target="org.example.LetterDataProcessor" relationship="TO_ONE">
+      <point x="-181.5" y="0.0" />
+      <point x="46.709836876363624" y="57.70380826029307" />
+      <point x="0.0" y="-50.0" />
+    </edge>
+    <edge source="org.example.Cobot" target="org.example.CobotDrawLetterCommandGenerator" relationship="TO_ONE">
+      <point x="-143.0" y="0.0" />
+      <point x="-167.29016312363638" y="884.9337181131939" />
+      <point x="-167.29016312363638" y="42.70380826029307" />
+      <point x="-181.5" y="-15.0" />
+    </edge>
+    <edge source="org.example.CobotControlPanel" target="org.example.Cobot" relationship="CREATE">
+      <point x="49.918813487048965" y="61.0" />
+      <point x="943.2882170362067" y="838.459513662257" />
+      <point x="142.99999999999994" y="-46.474204450936895" />
+    </edge>
+    <edge source="org.example.CobotControlPanel" target="org.example.CobotGUI" relationship="CREATE">
+      <point x="64.91881348704896" y="61.0" />
+      <point x="-101.66442851646741" y="-83.0" />
+    </edge>
+    <edge source="org.example.CobotDrawLetterCommandGenerator" target="org.example.Blackboard" relationship="TO_ONE">
+      <point x="-154.23012182338783" y="72.00019173970693" />
+      <point x="316.645" y="465.0" />
+      <point x="297.0" y="465.0" />
+      <point x="297.0" y="515.166" />
+      <point x="-190.0001511043015" y="4.42678428612453E-4" />
+    </edge>
+    <edge source="org.example.Cobot" target="org.example.Blackboard" relationship="TO_ONE">
+      <point x="4.511194599103874E-4" y="-83.99971811319392" />
+      <point x="384.808" y="661.666" />
+      <point x="297.0" y="661.666" />
+      <point x="297.0" y="515.166" />
+      <point x="-190.0001511043015" y="4.42678428612453E-4" />
+    </edge>
+    <edge source="org.example.CobotControlPanel" target="org.example.Cobot" relationship="TO_ONE">
+      <point x="-119.0" y="0.020283570105675608" />
+      <point x="746.6451511043015" y="393.66555732157144" />
+      <point x="746.6451511043015" y="823.459513662257" />
+      <point x="142.99999999999994" y="-61.474204450936895" />
+    </edge>
+    <edge source="org.example.Main" target="org.example.CobotControlPanel" relationship="CREATE">
+      <point x="43.081186512951035" y="-39.0" />
+      <point x="0.0" y="61.0" />
+    </edge>
+    <edge source="org.example.CobotControlPanel" target="org.example.CobotGUI" relationship="TO_ONE">
+      <point x="119.0" y="0.0" />
+      <point x="1206.96196586953" y="393.64527375146577" />
+      <point x="147.00932031685602" y="-83.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic" zoom="0.4068117313150426" showDependencies="true" x="603.9410232558137" y="467.77260465116274" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Constructors</Category>
+    <Category>Fields</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
