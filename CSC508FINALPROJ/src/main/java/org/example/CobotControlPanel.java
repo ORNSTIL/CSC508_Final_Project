@@ -9,14 +9,11 @@ import org.slf4j.LoggerFactory;
 public class CobotControlPanel extends JPanel {
     private static final Logger logger = LoggerFactory.getLogger(CobotControlPanel.class);
 
-    private JButton connectButton;
-    private JButton disconnectButton;
-    private JButton resetButton;
-    private JLabel statusLabel;
-    private JLabel commandLabel;
-    private JPanel keyboardRowPanel1;
-    private JPanel keyboardRowPanel2;
-    private JPanel keyboardRowPanel3;
+    private final JButton connectButton;
+    private final JButton disconnectButton;
+    private final JButton resetButton;
+    private final JLabel statusLabel;
+    private final JLabel commandLabel;
 
     public CobotControlPanel() {
         setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
@@ -65,9 +62,9 @@ public class CobotControlPanel extends JPanel {
         controlPanel.add(resetButton);
 
         // Keyboard Panels
-        keyboardRowPanel1 = createKeyboardRow("QWERTYUIOP");
-        keyboardRowPanel2 = createKeyboardRow("ASDFGHJKL");
-        keyboardRowPanel3 = createKeyboardRow("ZXCVBNM");
+        JPanel keyboardRowPanel1 = createKeyboardRow("QWERTYUIOP");
+        JPanel keyboardRowPanel2 = createKeyboardRow("ASDFGHJKL");
+        JPanel keyboardRowPanel3 = createKeyboardRow("ZXCVBNM");
 
         JPanel keyboardPanel = new JPanel();
         keyboardPanel.setLayout(new BoxLayout(keyboardPanel, BoxLayout.Y_AXIS));
@@ -115,9 +112,9 @@ public class CobotControlPanel extends JPanel {
 
     private void handleKeyPress(String letter) {
         Blackboard blackboard = Blackboard.getInstance();
-        blackboard.setData(letter);
         commandLabel.setText("Command: " + letter);
         logger.info("Letter '{}' sent to Blackboard.", letter);
+        blackboard.setKeyboardLetter(letter);
     }
 
     private void addActionListeners() {
@@ -146,7 +143,9 @@ public class CobotControlPanel extends JPanel {
         });
 
         resetButton.addActionListener(e -> {
-            Blackboard.getInstance().setData("RESET");
+//            Blackboard.getInstance().setKeyboardLetter("RESET");
+            Blackboard.getInstance().clearCobotCommands();
+            Blackboard.getInstance().addToCobotCommands("movej([1.14, -2.16, -1.58, -1.57, 1.57, 0], a=1.0, v=0.5)");
             commandLabel.setText("Command: RESET");
             logger.info("Reset command sent.");
         });
