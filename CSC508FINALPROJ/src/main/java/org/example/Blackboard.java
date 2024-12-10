@@ -47,8 +47,8 @@ public class Blackboard {
     }
 
     public void setKeyboardLetter(String keyboardLetter) {
-        if (keyboardLetter == null) {
-            logger.warn("Attempted to set null keyboardLetter in Blackboard.");
+        if (keyboardLetter == null || keyboardLetter.isEmpty()) {
+            logger.warn("Attempted to set null or empty keyboardLetter in Blackboard.");
             return;
         }
         

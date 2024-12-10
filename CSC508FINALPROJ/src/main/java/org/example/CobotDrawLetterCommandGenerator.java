@@ -85,7 +85,7 @@ public class CobotDrawLetterCommandGenerator implements PropertyChangeListener {
         if ("keyboardLetter".equals(evt.getPropertyName())) {
             String letter = (String) evt.getNewValue();
             logger.info("Received data from Blackboard: {}", letter);
-            if (letter == null || Objects.equals(letter, "")) return;
+            if (letter == null) return;
             genLetter(letter);
         }
     }
@@ -143,7 +143,6 @@ public class CobotDrawLetterCommandGenerator implements PropertyChangeListener {
             }
 
             charactersDrawn++;
-            Blackboard.getInstance().setKeyboardLetter("");
             Thread.sleep(interLetterPause);
         } catch (InterruptedException e) {
             logger.error("Interrupted while waiting: {}", e.getMessage());
