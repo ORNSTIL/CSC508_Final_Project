@@ -1,0 +1,9 @@
+org\example\Main.class
+org\example\CobotGUI$1.class
+org\example\Cobot.class
+org\example\LetterDataProcessor.class
+org\example\ServerConfig.class
+org\example\CobotGUI.class
+org\example\Blackboard.class
+org\example\CobotControlPanel.class
+org\example\CobotDrawLetterCommandGenerator.class

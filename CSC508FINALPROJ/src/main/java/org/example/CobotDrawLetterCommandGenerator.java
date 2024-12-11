@@ -8,6 +8,15 @@ import java.util.Objects;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Translates letter data into cobot-compatible movement commands.
+ *
+ * @version 1.0
+ * @author Luca Ornstil
+ * @author Monish Suresh
+ * @author Christine Widden
+ */
+
 public class CobotDrawLetterCommandGenerator implements PropertyChangeListener {
     private static final Logger logger = LoggerFactory.getLogger(CobotDrawLetterCommandGenerator.class);
     private final LetterDataProcessor ldp;

@@ -54,13 +54,16 @@ public class Blackboard {
 
         String oldData = this.keyboardLetter;
 
+        // Notify observers of clearing the letter
         this.keyboardLetter = null; // Set to null temporarily
         support.firePropertyChange("keyboardLetter", oldData, null);
 
+        // Notify observers of the new letter
         this.keyboardLetter = keyboardLetter;
-        support.firePropertyChange("keyboardLetter", oldData, keyboardLetter);
+        support.firePropertyChange("keyboardLetter", null, keyboardLetter); // Fire with a guaranteed change
         logger.info("Keyboard letter updated in Blackboard: {}", keyboardLetter);
     }
+
 
     public String getKeyboardLetter() {
         return keyboardLetter;
