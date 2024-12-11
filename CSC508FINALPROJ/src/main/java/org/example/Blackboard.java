@@ -51,7 +51,7 @@ public class Blackboard {
             logger.warn("Attempted to set null or empty keyboardLetter in Blackboard.");
             return;
         }
-        
+
         String oldData = this.keyboardLetter;
 
         this.keyboardLetter = null; // Set to null temporarily

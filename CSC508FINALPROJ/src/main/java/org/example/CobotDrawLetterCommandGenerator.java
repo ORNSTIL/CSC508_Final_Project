@@ -64,18 +64,18 @@ public class CobotDrawLetterCommandGenerator implements PropertyChangeListener {
 
     public CobotDrawLetterCommandGenerator() {
         this(
-            20,
-            0.040,
-            0.030,
-            0.030,
-            0.005,
-            -0.300,
-            0.300,
-            0.000,
-            0.010,
-            500,
-            800,
-            1000
+                20,
+                0.040,
+                0.030,
+                0.030,
+                0.005,
+                -0.300,
+                0.300,
+                0.000,
+                0.010,
+                500,
+                800,
+                1000
         );
     }
 
