@@ -44,9 +44,9 @@ This report provides detailed metrics for each file in the project. The metrics 
 ## File: `CobotControlPanel.java`
 
 ### Class: `CobotControlPanel`
-- **Instability (I)**: 0.67
+- **Instability (I)**: 0.83
 - **Abstractness (A)**: 0 (concrete class).
-- **Distance from Main Sequence (D)**: \( |D = 0 + 0.67 - 1| = 0.33 \).
+- **Distance from Main Sequence (D)**: \( |D = 0 + 0.83 - 1| = 0.17 \).
 
 #### Cyclomatic Complexity
 - `connectCobot(ActionEvent e)`: CC = 2
