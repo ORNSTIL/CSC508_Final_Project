@@ -58,9 +58,9 @@ This report provides detailed metrics for each file in the project. The metrics 
 ## File: `CobotGUI.java`
 
 ### Class: `CobotGUI`
-- **Instability (I)**: CC = 0.5
+- **Instability (I)**: 1
 - **Abstractness (A)**: 0 (concrete class).
-- **Distance from Main Sequence (D)**: \( |D = 0 + 0.5 - 1| = 0.5 \).
+- **Distance from Main Sequence (D)**: \( |D = 0 + 1 - 1| = 0 \).
 
 #### Cyclomatic Complexity
 - `createHeaderPanel(ActionListener connectAction, ActionListener disconnectAction)`: CC = 1
@@ -74,9 +74,9 @@ This report provides detailed metrics for each file in the project. The metrics 
 ## File: `CobotDrawLetterCommandGenerator.java`
 
 ### Class: `CobotDrawLetterCommandGenerator`
-- **Instability (I)**: 0.67
+- **Instability (I)**: 1
 - **Abstractness (A)**: 0 (concrete class).
-- **Distance from Main Sequence (D)**: \( |D = 0 + 0.67 - 1| = 0.33 \).
+- **Distance from Main Sequence (D)**: \( |D = 0 + 1 - 1| = 0 \).
 
 #### Cyclomatic Complexity
 - `propertyChange(PropertyChangeEvent evt)`: CC = 3
